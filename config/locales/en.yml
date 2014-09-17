@@ -1,0 +1,7 @@
+en:
+  auto_roles: "Auto roles"
+  auto_role: "Auto role"
+  assignee_auto_role: "Auto role for assignee (that is not a member, yet)"
+  label_auto_role_edit: "Auto role edit window"
+  label_auto_roles_submit: "Submit"
+  label_autorole_custom_field_id: "Auto-role project integer custom field ID"
