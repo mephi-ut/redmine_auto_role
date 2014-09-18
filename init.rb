@@ -12,7 +12,7 @@ Redmine::Plugin.register :redmine_auto_role do
 	project_module :auto_roles do
 		permission :edit_projects,
 			{ :projects => [:setautorole, :getautorole] },
-			:require => :loggedin
+			:require => :loggedin, :public => true
 	end
 
 	settings :default => {
