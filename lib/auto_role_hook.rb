@@ -25,8 +25,8 @@ module AutoWatchHookModule
 			if project.module_enabled?("auto_roles")
 				Rails.logger.warn("Project ID: #{issue['project_id']}")
 				role_id = project.custom_field_value(Setting.plugin_redmine_auto_role['autorole_custom_field_id'])
-				unless role_id.nil? || role_id == '1'
-					Rails.logger.warn("Adding")
+				unless role_id.nil? || role_id.empty? || role_id == '1'
+					Rails.logger.warn("Adding. Role ID: #{role_id}")
 					member         = Member.new
 					member.user    = issue.assigned_to
 					member.project = project
