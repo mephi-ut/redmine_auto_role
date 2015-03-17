@@ -1,13 +1,31 @@
 <h2><%=l(:label_auto_role_edit) %></h2>
-<% auto_role_id = @project.custom_field_value(Setting.plugin_redmine_auto_role['autorole_custom_field_id']) %>
-<% auto_role_id = (auto_role_id.nil? || auto_role_id.empty?) ? 1 : auto_role_id %>
-<% logger.warn("Auto role ID: #{auto_role_id}") %>
-<% auto_role    = Role.find(auto_role_id) %>
-<%=labelled_form_for auto_role, :url => url_for(:controller => "projects", :action => "setautorole", :role_id => auto_role_id) do |f| %>
-	<% error_messages_for auto_role %>
+
+<% assignee_auto_role_id = @project.custom_field_value(Setting.plugin_redmine_auto_role['assignee_autorole_custom_field_id']) %>
+<% assignee_auto_role_id = (assignee_auto_role_id.nil? || assignee_auto_role_id.empty?) ? 1 : assignee_auto_role_id %>
+<% logger.warn("Assignee auto role ID: #{assignee_auto_role_id}") %>
+<% assignee_auto_role    = Role.find(assignee_auto_role_id) %>
+
+<% author_auto_role_id = @project.custom_field_value(Setting.plugin_redmine_auto_role['author_autorole_custom_field_id']) %>
+<% author_auto_role_id = (author_auto_role_id.nil? || author_auto_role_id.empty?) ? 1 : author_auto_role_id %>
+<% logger.warn("author auto role ID: #{author_auto_role_id}") %>
+<% author_auto_role    = Role.find(author_auto_role_id) %>
+
+<%=labelled_form_for assignee_auto_role, :url => url_for(:controller => "projects", :action => "setassigneeautorole", :role_id => assignee_auto_role_id) do |f| %>
+	<% error_messages_for assignee_auto_role %>
 
 	<p>
 		<label><%=l(:assignee_auto_role)%>:</label>
+		<%= f.collection_select :id, Role.sorted, :id, :name %>
+	</p>
+
+	<%= submit_tag l(:label_auto_roles_submit) %>
+<% end %>
+
+<%=labelled_form_for author_auto_role, :url => url_for(:controller => "projects", :action => "setauthorautorole", :role_id => author_auto_role_id) do |f| %>
+	<% error_messages_for author_auto_role %>
+
+	<p>
+		<label><%=l(:author_auto_role)%>:</label>
 		<%= f.collection_select :id, Role.sorted, :id, :name %>
 	</p>
 

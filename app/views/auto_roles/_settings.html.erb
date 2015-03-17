@@ -1,4 +1,8 @@
 <p>
-	<label><%= l(:label_autorole_custom_field_id) %></label>
-	<%= text_field_tag('settings[autorole_custom_field_id]', @settings[:autorole_custom_field_id], :type => 'number') %>
+	<label><%= l(:label_author_autorole_custom_field_id) %></label>
+	<%= text_field_tag('settings[author_autorole_custom_field_id]', @settings[:author_autorole_custom_field_id], :type => 'number') %>
+</p>
+<p>
+	<label><%= l(:label_assignee_autorole_custom_field_id) %></label>
+	<%= text_field_tag('settings[assignee_autorole_custom_field_id]', @settings[:assignee_autorole_custom_field_id], :type => 'number') %>
 </p>

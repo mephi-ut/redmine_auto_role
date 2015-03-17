@@ -11,12 +11,13 @@ Redmine::Plugin.register :redmine_auto_role do
 
 	project_module :auto_roles do
 		permission :edit_projects,
-			{ :projects => [:setautorole, :getautorole] },
+			{ :projects => [:setassigneeautorole, :getassigneeautorole, :setauthorautorole, :getauthorautorole, ] },
 			:require => :loggedin, :public => true
 	end
 
 	settings :default => {
-			:autorole_custom_field_id	=> nil
+			:assignee_autorole_custom_field_id	=> nil,
+			:author_autorole_custom_field_id	=> nil
 		 },
 		 :partial => 'auto_roles/settings'
 end

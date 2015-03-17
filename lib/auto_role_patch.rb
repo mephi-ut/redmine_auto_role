@@ -5,13 +5,26 @@ module AutoRolesProjectsHelperPatch
 		base.extend(ClassMethods)
 		base.send(:include, InstanceMethods)
 		base.class_eval do
-			def setautorole
-				logger.warn("in auto-role id: #{params[:role][:id]}")
-				@project.custom_field_values=({Setting.plugin_redmine_auto_role['autorole_custom_field_id'] => params[:role][:id]})
+			def setassigneeautorole
+				logger.warn("[assignee] in auto-role id: #{params[:role][:id]}")
+				@project.custom_field_values=({Setting.plugin_redmine_auto_role['assignee_autorole_custom_field_id'] => params[:role][:id]})
 				@project.save_custom_field_values
 				redirect_to :back
 			end
-			def getautorole
+			def getassigneeautorole
+				redirect_to(
+					:controller => 'projects',
+					:action => 'settings',
+					:id => @project.identifier
+				)
+			end
+			def setauthorautorole
+				logger.warn("[author] in auto-role id: #{params[:role][:id]}")
+				@project.custom_field_values=({Setting.plugin_redmine_auto_role['author_autorole_custom_field_id'] => params[:role][:id]})
+				@project.save_custom_field_values
+				redirect_to :back
+			end
+			def getauthorautorole
 				redirect_to(
 					:controller => 'projects',
 					:action => 'settings',
