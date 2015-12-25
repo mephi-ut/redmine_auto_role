@@ -6,7 +6,7 @@ require_dependency 'auto_role_patch'
 Redmine::Plugin.register :redmine_auto_role do
 	name 'Redmine Auto role plugin'
 	author 'Dmitry Yu Okunev'
-	description 'This plugin is a hook to add users to the project membership list automatically when they are assigned to some task.'
+	description 'This plugin is a hook to add users to the project membership list automatically when they are assigned to some task. This plugin requires redmine_restricted_members_managament to work properly.'
 	version '0.0.1'
 
 	project_module :auto_roles do

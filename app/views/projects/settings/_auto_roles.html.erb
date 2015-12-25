@@ -10,12 +10,18 @@
 <% logger.warn("author auto role ID: #{author_auto_role_id}") %>
 <% author_auto_role    = Role.find(author_auto_role_id) %>
 
+<% 
+   permitted_roles = ProjectsController.permitted_roles_for_user(User.current.id ,  @project.users_by_role).sort
+   available_roles = Role.find_all_givable
+   available_roles.reject! {|r| not permitted_roles.include?(r.id.to_s)}
+%>
+
 <%=labelled_form_for assignee_auto_role, :url => url_for(:controller => "projects", :action => "setassigneeautorole", :role_id => assignee_auto_role_id) do |f| %>
 	<% error_messages_for assignee_auto_role %>
 
 	<p>
 		<label><%=l(:assignee_auto_role)%>:</label>
-		<%= f.collection_select :id, Role.sorted, :id, :name %>
+		<%= f.collection_select :id, available_roles, :id, :name %>
 	</p>
 
 	<%= submit_tag l(:label_auto_roles_submit) %>
@@ -26,7 +32,7 @@
 
 	<p>
 		<label><%=l(:author_auto_role)%>:</label>
-		<%= f.collection_select :id, Role.sorted, :id, :name %>
+		<%= f.collection_select :id, available_roles, :id, :name %>
 	</p>
 
 	<%= submit_tag l(:label_auto_roles_submit) %>
